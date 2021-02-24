@@ -1,6 +1,10 @@
 # faster.nvim
 A neovim plugin to accelerate j or k moving.
 
+# Screenshot
+![use accelerate](./image/acc.gif) 
+![normal](./image/noacc.gif) 
+
 # Usage
 It only testing with the neovim plugin management.
 ```lua
