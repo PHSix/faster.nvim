@@ -6,7 +6,7 @@ A neovim plugin to accelerate j or k moving.
 ![normal](./image/noacc.gif) 
 
 # Usage
-It only testing with the neovim plugin management.
+It only testing with the packer(one of the neovim plugins manager).
 ```lua
 use{
   "PHSix/faster.nvim",
