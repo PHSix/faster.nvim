@@ -9,7 +9,7 @@ local faster_move_j = function ()
     vim.cmd('normal! ' .. vim.v.count .. 'j')
     return
   end
-  if tonumber(fn['reltimestr'](fn['reltime']())) - cjtime > 0.1 then
+  if tonumber(fn['reltimestr'](fn['reltime']())) - cjtime > 0.1 or tonumber(fn['reltimestr'](fn['reltime']())) - cjtime < 0.01 then
     press_fre = 0
   end
   local step = math.floor((press_fre / 5) + 1)
@@ -32,7 +32,7 @@ local faster_move_k = function ()
     vim.cmd('normal! ' .. vim.v.count .. 'k')
     return
   end
-  if tonumber(fn['reltimestr'](fn['reltime']())) - cktime > 0.5 then
+  if tonumber(fn['reltimestr'](fn['reltime']())) - cktime > 0.1 or tonumber(fn['reltimestr'](fn['reltime']())) - cktime < 0.01 then
     press_fre = 0
   end
   local step = math.floor((press_fre / 5) + 1)
