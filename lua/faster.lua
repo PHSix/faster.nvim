@@ -1,57 +1,46 @@
 local vim = vim
 local fn = vim.fn
-local cktime = tonumber(fn['reltimestr'](fn['reltime']()))
-local cjtime = tonumber(fn['reltimestr'](fn['reltime']()))
 local press_fre = 0
+local times = {}
 
-local faster_move_j = function ()
+local initState = function()
+  local now_time = tonumber(fn["reltimestr"](fn["reltime"]()))
+  times = {
+    k = now_time,
+    j = now_time,
+    gk = now_time,
+    gj = now_time
+  }
+end
+
+initState()
+-- @param to string
+local move = function(to)
   if vim.v.count > 1 then
-    vim.cmd('normal! ' .. vim.v.count .. 'j')
+    vim.cmd("normal! " .. vim.v.count .. to)
     return
   end
-  if tonumber(fn['reltimestr'](fn['reltime']())) - cjtime > 0.1 or tonumber(fn['reltimestr'](fn['reltime']())) - cjtime < 0.01 then
+  local cur_time = times[to]
+  if
+    tonumber(fn["reltimestr"](fn["reltime"]())) - cur_time > 0.1 or
+      tonumber(fn["reltimestr"](fn["reltime"]())) - cur_time < 0.01
+   then
     press_fre = 0
   end
   local step = math.floor((press_fre / 5) + 1)
   if step >= 10 then
     step = 10
   end
-  cjtime = tonumber(fn['reltimestr'](fn['reltime']()))
+  times[to] = tonumber(fn["reltimestr"](fn["reltime"]()))
   press_fre = press_fre + 1
   local cmd = ""
   if step ~= 1 then
-    cmd = 'normal! ' .. step .. 'j'
+    cmd = "normal! " .. step .. to
   else
-    cmd = 'normal! ' .. 'j'
+    cmd = "normal! " .. to
   end
   vim.cmd(cmd)
 end
-
-local faster_move_k = function ()
-  if vim.v.count > 1 then
-    vim.cmd('normal! ' .. vim.v.count .. 'k')
-    return
-  end
-  if tonumber(fn['reltimestr'](fn['reltime']())) - cktime > 0.1 or tonumber(fn['reltimestr'](fn['reltime']())) - cktime < 0.01 then
-    press_fre = 0
-  end
-  local step = math.floor((press_fre / 5) + 1)
-  if step >= 10 then
-    step = 10
-  end
-  cktime = tonumber(fn['reltimestr'](fn['reltime']()))
-  press_fre = press_fre + 1
-  local cmd = ""
-  if step ~= 1 then
-    cmd = 'normal! ' .. step .. 'k'
-  else
-    cmd = 'normal! ' .. 'k'
-  end
-  vim.cmd(cmd)
-end
-
 return {
-  move_j = faster_move_j,
-  move_k = faster_move_k
+  move = move
 }
-
