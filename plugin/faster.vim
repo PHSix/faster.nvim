@@ -5,3 +5,6 @@ nnoremap <silent><Plug>(faster_move_j) :<C-u>lua require('faster').move("j")<CR>
 nnoremap <silent><Plug>(faster_move_k) :<C-u>lua require('faster').move("k")<CR>
 nnoremap <silent><Plug>(faster_move_gj) :<C-u>lua require('faster').move("gj")<CR>
 nnoremap <silent><Plug>(faster_move_gk) :<C-u>lua require('faster').move("gk")<CR>
+lua _G.faster = require('faster').vmove
+vnoremap <silent><expr> <Plug>(faster_vmove_j) v:lua.faster("j")
+vnoremap <silent><expr> <Plug>(faster_vmove_k) v:lua.faster("k")
