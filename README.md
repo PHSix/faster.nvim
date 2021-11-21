@@ -7,6 +7,7 @@ A neovim plugin to accelerate j or k moving.
 
 # Usage
 > 2021-10-24 upgrade: Now support map `gk` or `gj` for user who has `set wrap`.
+
 > 2021-11-21 upgrade: Add visual mode support.
 It only testing with the packer(one of the neovim plugins manager).
 ```lua
