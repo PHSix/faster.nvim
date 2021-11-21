@@ -46,6 +46,9 @@ local move = function(to)
 end
 
 local vmove = function(to)
+  if vim.v.count > 1 then
+    return t(to)
+  end
   local last_time = times[to]
   if get_cur_time() - last_time > 0.1 or get_cur_time() - last_time < 0.01 then
     press_freq = 0
